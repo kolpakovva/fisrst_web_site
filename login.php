@@ -17,11 +17,11 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h1 class="mb-4">Login</h1>
-                <form action="/login.html" method="POST" class="d-flex flex-column gap-3">
+                <form action="/login.php" method="POST" class="d-flex flex-column gap-3">
                     <input type="text" name="login" class="form-control-hacker-input" placeholder="login">
                     <input type="password" name="password" class="form-control-hacker-input" placeholder="password">
                     <button class="btn btn-primary" type="submit" name="submit">Register</button>
-                    <p class="mt-3">Already have an account?<a href="/registration.html">Register</a></p>
+                    <p class="mt-3">Already have an account?<a href="/registration.php">Register</a></p>
                 </form>
             </div>
         </div>
