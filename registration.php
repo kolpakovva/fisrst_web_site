@@ -52,11 +52,11 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO users (username, email, pass) VALUES ('$login', '$email', '$pass')";
 
     if(!mysqli_query($link, $sql)) {
-        echo "Not added users in table";
+        echo 'Not added users in table';
     } else {
         header("Location: /login.php");
         exit();
-        
+
     }
 }
 
