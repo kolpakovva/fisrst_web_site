@@ -20,7 +20,7 @@
                 <form action="/login.php" method="POST" class="d-flex flex-column gap-3">
                     <input type="text" name="login" class="form-control-hacker-input" placeholder="login">
                     <input type="password" name="password" class="form-control-hacker-input" placeholder="password">
-                    <button class="btn btn-primary" type="submit" name="submit">Register</button>
+                    <button class="btn btn-primary" type="submit" name="submit">Login</button>
                     <p class="mt-3">Already have an account?<a href="/registration.php">Register</a></p>
                 </form>
             </div>
@@ -49,9 +49,10 @@ if (isset($_POST['submit'])) {
     $sql = "SELECT * FROM users WHERE username='$login' AND pass='$pass'";
 
     $result = mysqli_query($link, $sql);
+
      if (mysqli_num_rows($result) == 1) {
         setcookie("User", $login, time()+7200);
-        header("Location: profile.php");
+        header("Location: /profile.php");
      } else {
         echo 'Incorrect Username or Password';
      }

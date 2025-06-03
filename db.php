@@ -13,7 +13,7 @@ if (!$link) {
 
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 
-if (mysqli_query($link, $sql)) {
+if (!mysqli_query($link, $sql)) {
     echo "Not create database";
 }
 
