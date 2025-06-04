@@ -30,8 +30,8 @@
                     $sql = "SELECT * FROM posts";
                     $res = mysqli_query($link, $sql);
                     if (mysqli_num_rows($res) > 0) {
-                        while ($_POST = mysqli_fetch_array($res)) {
-                            echo "<a href='/posts.php?id=" . $_POST["id"] . "'>" . $_POST["title"] . "</a><br>";
+                        while ($post = mysqli_fetch_array($res)) {
+                            echo "<a href='/posts.php?id=" . $post["id"] . "'>" . $post["title"] . "</a><br>";
                         }
                     } else {
                         echo("No posts yet");

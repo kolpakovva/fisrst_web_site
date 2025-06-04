@@ -63,7 +63,7 @@
 <html>
 
 <?php
-if (isset($_COOKIE['User'])){
+if (!isset($_COOKIE['User'])){
     header("Location: /login.php");
 exit();
 }
@@ -76,6 +76,9 @@ if (isset($_POST['submit'])) {
     $main_text = $_POST['postContent'];
 
     if (!$title || !$main_text) die ("No data post");
+    $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
+
+    if (!mysqli_query($link, $sql)) die ("Error insert dada in post");
 
     if (!empty($_FILES["file"]))
     {
