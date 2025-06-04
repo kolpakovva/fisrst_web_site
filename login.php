@@ -50,12 +50,12 @@ if (isset($_POST['submit'])) {
 
     $result = mysqli_query($link, $sql);
 
-     if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) == 1) {
         setcookie("User", $login, time()+7200);
         header("Location: /profile.php");
-     } else {
+    } else {
         echo 'Incorrect Username or Password';
-     }
+    }
 }
 
 ?>    
