@@ -69,7 +69,7 @@ exit();
 }
 
 require_once('db.php');
-$link = mysqli_connect('127.0.0.1', 'root', 'password', 'db_name');
+$link = mysqli_connect('db', 'root', 'password', 'db_name');
 
 if (isset($_POST['submit'])) {
     $title = $_POST['postTitle'];

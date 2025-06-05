@@ -26,7 +26,7 @@
                 </div>
                 <?php
                 } else {
-                    $link = mysqli_connect('127.0.0.1', 'root', 'password', 'db_name');
+                    $link = mysqli_connect('db', 'root', 'password', 'db_name');
                     $sql = "SELECT * FROM posts";
                     $res = mysqli_query($link, $sql);
                     if (mysqli_num_rows($res) > 0) {

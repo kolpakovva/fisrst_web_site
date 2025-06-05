@@ -1,0 +1,37 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=db_name
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=password
+    depends_on:
+      - db
+    networks:
+      - site_network
+
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_DATADASE=db_name
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - site_network
+
+volumes:
+  db_data:
+
+networks:
+  site_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.55.0.0/16
