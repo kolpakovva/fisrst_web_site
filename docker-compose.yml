@@ -14,7 +14,8 @@ services:
     depends_on:
       - db
     networks:
-      - site_network
+      site_network:
+        ipv4_address: 172.55.0.22
 
   db:
     image: mariadb
@@ -24,7 +25,37 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     networks:
+      site_network:
+        ipv4_address: 172.55.0.23
+
+  open-appsec-agent:
+    image: ghcr.io/openappsec/agent:latest
+    container_name: open-appsec-agent
+    ipc: host
+    environment:
+      - registered_server=NGINX
+      - AGENT_TOKEN=cp-64771bd1-f22c-4749-9f4d-f1748d78d92e5e382958-4f76-435b-816f-f086459e18c6
+    volumes:
+      - ./openappsec/config:/etc/cp/conf
+      - ./openappsec/data:/etc/cp/data
+      - ./openappsec/debug:/etc/cp/nano_agent
+    networks:
       - site_network
+
+  open-appsec-nginx:
+    image: ghcr.io/openappsec/nginx-attachment:latest
+    container_name: open-appsec-nginx
+    depends_on:
+      - web
+      - open-appsec-agent
+    ipc: host
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      site_network:
+        ipv4_address: 172.55.0.24
 
 volumes:
   db_data:
