@@ -1,0 +1,32 @@
+{
+    "Last update attempt": "2025-06-07T20:59:27.092683",
+    "Last update status": "Succeeded ",
+    "Last update": "2025-06-07T20:59:27.158843",
+    "Last manifest update": "2025-06-07T20:00:04.519034",
+    "Policy version": "4",
+    "Last policy update": "2025-06-07T20:09:45.872925",
+    "Last settings update": "2025-06-07T20:09:45.872925",
+    "Upgrade mode": "automatic",
+    "Fog address": "https://inext-agents.cloud.ngen.checkpoint.com",
+    "Registration status": "Succeeded ",
+    "Registration details": {
+        "Name": "631b50677558",
+        "Type": "InfinityNextDocker",
+        "Platform": "alpine",
+        "Architecture": "x86_64"
+    },
+    "Agent ID": "eed3fb83-ba4e-4d00-9085-7f662be5640c",
+    "Profile ID": "26cba577-c15c-58f2-8f36-bfab1ad25ef6",
+    "Tenant ID": "org_hxuuI2eyl6bGPOih",
+    "Manifest status": "Succeeded ",
+    "Service policy": {
+        "accessControlV2": "/etc/cp/conf/accessControlV2/accessControlV2.policy",
+        "fileSecurity": "/etc/cp/conf/fileSecurity/fileSecurity.policy",
+        "ips": "/etc/cp/conf/ips/ips.policy",
+        "notification": "/etc/cp/conf/notification/notification.policy",
+        "registration-data": "/etc/cp/conf/registration-data/registration-data.policy",
+        "versions": "/etc/cp/conf/versions/versions.policy",
+        "waap": "/etc/cp/conf/waap/waap.policy"
+    },
+    "Service settings": {}
+}

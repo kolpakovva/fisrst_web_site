@@ -1,0 +1,1 @@
+{"rulebase":{"accessControl":[],"l4firewall":[],"rateLimit":[{"context":"assetId(accba5ff-9064-a140-5b36-b124bd35d771)","mode":"Inactive","name":"Rate Limit Practice","practiceId":"bccba5ff-91e9-5f8b-36e5-57a3a6a3005f","rules":[]}],"traditionalFirewall":[]}}
