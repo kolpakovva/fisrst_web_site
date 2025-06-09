@@ -15,7 +15,7 @@ services:
       - db
     networks:
       site_network:
-        ipv4_address: 172.55.0.22
+        ipv4_address: 172.55.0.32
 
   db:
     image: mariadb
@@ -26,7 +26,7 @@ services:
       - db_data:/var/lib/mysql
     networks:
       site_network:
-        ipv4_address: 172.55.0.23
+        ipv4_address: 172.55.0.33
 
   open-appsec-agent:
     image: ghcr.io/openappsec/agent:latest
@@ -34,7 +34,7 @@ services:
     ipc: host
     environment:
       - registered_server=NGINX
-      - AGENT_TOKEN=cp-64771bd1-f22c-4749-9f4d-f1748d78d92e5e382958-4f76-435b-816f-f086459e18c6
+      - AGENT_TOKEN=cp-86805938-a702-4815-85ed-6f75b4c6ececfb08542e-576a-4620-907b-e9356c4f8495
     volumes:
       - ./openappsec/config:/etc/cp/conf
       - ./openappsec/data:/etc/cp/data
@@ -55,7 +55,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       site_network:
-        ipv4_address: 172.55.0.24
+        ipv4_address: 172.55.0.34
 
 volumes:
   db_data:

@@ -72,29 +72,51 @@ require_once('db.php');
 $link = mysqli_connect('db', 'root', 'password', 'db_name');
 
 if (isset($_POST['submit'])) {
-    $title = $_POST['postTitle'];
-    $main_text = $_POST['postContent'];
+
+    $title = strip_tags($_POST['postTitle']);
+    $main_text = strip_tags($_POST['postContent']);
+
+    $title = mysqli_real_escape_string($link, $_POST['postTitle']);
+    $main_text = mysqli_real_escape_string($link, $_POST['postContent']);
 
     if (!$title || !$main_text) die ("No data post");
+
+    $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+    $main_text = htmlspecialchars($main_text, ENT_QUOTES, 'UTF-8');
+    
     $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
 
     if (!mysqli_query($link, $sql)) die ("Error insert dada in post");
 
     if (!empty($_FILES["file"]))
     {
-        if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg") 
-        || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg")
-        || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
-        && (@$_FILES["file"]["size"] < 102400))
-        {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"] );
-        echo "Load in: " . "upload/" . $_FILES["file"]["name"];
+        $errors = [];
+        $allowedTypes = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
+        $maxFileSize = 102400;
+        if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+            $errors [] = $_FILES['file']['error'];
         }
-        else
-        {
-            echo "Upload Failed!";
+        $realFileSize = filesize(filename: $_FILES['file']['tmp_name']);
+        if ($realFileSize > $maxFileSize) {
+            $errors [] = $_FILES['file']['error'];
         }
+        $fileType = finfo_file(finfo: finfo_open(flags: FILEINFO_MIME_TYPE), filename: $_FILES['file']['tmp_name']);
+        if (!in_array($fileType, $allowedTypes)) {
+            $errors [] = $_FILES['file']['error'];
+        }
+        if (empty($errors)) {
+            $tempPath = $_FILES['file']['tmp_name'];
+            $destinationPath = 'upload/' . uniqid() .'_'. basename(path: $_FILES['file']['name']);
+            if (move_uploaded_file(from: $tempPath, to: $destinationPath)) {
+                echo 'GOOD UPLOAD' . $destinationPath;
+            } else {
+                $errors [] = 'ERROR UPLOAD FILE';
+            }
+        } else {
+            foreach ($errors as $error) {
+                echo $error . '<br>';
+            }
+        }    
     }
-   
 }
 ?>
